@@ -155,6 +155,13 @@ class DesignContext:
         if width_mode == 'proportional':
             builder.kerning_values.update(self._get_proportional_kerning_values())
 
+        builder.opentype_config.head_bounding_box_override = opentype.BoundingBox(
+            x_min=0,
+            y_min=layout_metric.descent,
+            x_max=self.font_size,
+            y_max=layout_metric.ascent,
+        )
+
         return builder
 
     def _create_collection_builder(self, width_mode: WidthMode) -> FontCollectionBuilder:
